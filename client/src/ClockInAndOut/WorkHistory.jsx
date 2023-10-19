@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../Style/workHistory.css'; // Import the CSS file
 
 function WorkHistory({ name }) {
-  const [workHistory, setWorkHistory] = useState([]);
+  const [workHistory, setWorkHistory] = useState(null);
 
   useEffect(() => {
     async function fetchWorkHistory() {
@@ -30,14 +30,18 @@ function WorkHistory({ name }) {
   return (
     <div className='work-history-container'>
       <h2>Work History for {name}</h2>
-      <div className='work-history-list'>
-        {workHistory.map((entry, index) => (
-          <div key={index}>
-            <p>In: {new Date(entry.start).toLocaleString()}</p>
-            <p>Out: {new Date(entry.end).toLocaleString()}</p>
-          </div>
-        ))}
-      </div>
+      {workHistory ? (
+        <div className='work-history-list'>
+          {workHistory.map((entry, index) => (
+            <div key={index}>
+              <p>In: {new Date(entry.start).toLocaleString()}</p>
+              <p>Out: {new Date(entry.end).toLocaleString()}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        'No work history found.'
+      )}
     </div>
   );
 }
