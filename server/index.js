@@ -1,41 +1,41 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const User = require("./User");
-const cors = require("cors");
+const express = require('express');
+const mongoose = require('mongoose');
+const User = require('./models/Employee');
+const cors = require('cors');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://admin:adminpassword@testdb.falcnxk.mongodb.net/?retryWrites=true&w=majority",
+  'mongodb+srv://admin:adminpassword@testdb.falcnxk.mongodb.net/?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }
 );
 
-app.post("/clockin", async (req, res) => {
+app.post('/clockin', async (req, res) => {
   const { userName } = req.body;
   const user = await User.findOne({ name: userName });
 
   if (user) {
     user.clockInTime = new Date();
     await user.save();
-    console.log("Clock-in time recorded.");
-    res.status(200).send("Clock-in successful.");
+    console.log('Clock-in time recorded.');
+    res.status(200).send('Clock-in successful.');
   } else {
     const newUser = new User({
       name: userName,
       clockInTime: new Date(),
     });
     await newUser.save();
-    console.log("User created.");
-    res.status(200).send("Clock-in successful.");
+    console.log('User created.');
+    res.status(200).send('Clock-in successful.');
   }
 });
 
-app.post("/clockout", async (req, res) => {
+app.post('/clockout', async (req, res) => {
   const { userName } = req.body;
   const user = await User.findOne({ name: userName });
 
@@ -44,15 +44,15 @@ app.post("/clockout", async (req, res) => {
 
     const timeDiff = user.clockOutTime.getTime() - user.clockInTime.getTime();
     await user.save();
-    console.log("Clock-out time recorded.");
+    console.log('Clock-out time recorded.');
     res.status(200).send({ timeDiff: timeDiff });
   } else {
-    console.log("User not found.");
-    res.status(400).send("User not found.");
+    console.log('User not found.');
+    res.status(400).send('User not found.');
   }
 });
 
-app.get("/workhistory/:userName", async (req, res) => {
+app.get('/workhistory/:userName', async (req, res) => {
   const userName = req.params.userName;
   try {
     const user = await User.findOne({ name: userName });
@@ -60,11 +60,11 @@ app.get("/workhistory/:userName", async (req, res) => {
       const workHistory = user.workHistory;
       res.json(workHistory);
     } else {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: 'User not found' });
     }
   } catch (error) {
-    console.error("Error fetching work history:", error);
-    res.status(500).json({ message: "Error fetching work history" });
+    console.error('Error fetching work history:', error);
+    res.status(500).json({ message: 'Error fetching work history' });
   }
 });
 
