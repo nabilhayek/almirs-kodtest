@@ -60,7 +60,7 @@
 .work-history-list {
   display: flex;
   flex-direction: column;
-  height: 150px;
+  max-height: 150px;
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
