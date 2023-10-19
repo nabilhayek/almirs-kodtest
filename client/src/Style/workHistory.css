@@ -56,3 +56,11 @@
 .btn:hover {
   background-color: #4e73a3;
 }
+
+.work-history-list {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  width: 100%;
+  overflow-y: scroll;
+}

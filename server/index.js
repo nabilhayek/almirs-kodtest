@@ -43,6 +43,14 @@ app.post('/clockout', async (req, res) => {
     user.clockOutTime = new Date();
 
     const timeDiff = user.clockOutTime.getTime() - user.clockInTime.getTime();
+
+    user.workHistory = [
+      ...user.workHistory,
+      {
+        start: user.clockInTime,
+        end: user.clockOutTime,
+      },
+    ];
     await user.save();
     console.log('Clock-out time recorded.');
     res.status(200).send({ timeDiff: timeDiff });
@@ -54,11 +62,11 @@ app.post('/clockout', async (req, res) => {
 
 app.get('/workhistory/:userName', async (req, res) => {
   const userName = req.params.userName;
+  console.log(userName);
   try {
     const user = await User.findOne({ name: userName });
     if (user) {
-      const workHistory = user.workHistory;
-      res.json(workHistory);
+      res.json(user.workHistory);
     } else {
       res.status(404).json({ message: 'User not found' });
     }

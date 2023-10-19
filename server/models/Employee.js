@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -6,10 +6,10 @@ const userSchema = new mongoose.Schema({
   clockOutTime: Date,
   workHistory: [
     {
-      date: Date,
-      duration: Number, // In seconds
+      start: Date,
+      end: Date,
     },
   ],
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model('user', userSchema);
