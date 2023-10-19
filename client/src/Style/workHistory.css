@@ -1,0 +1,58 @@
+.ReactModal__Content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  height: 340px;
+  max-width: 300px; /* Set the maximum width to make the modal smaller */
+  margin: 0 auto; /* Center the modal horizontally */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  overflow-y: none;
+}
+
+.ReactModal__Content {
+  background: linear-gradient(
+    180deg,
+    #6da1b6b2,
+    #6591aa,
+    #799795,
+    #63758f
+  ) !important;
+  opacity: 90%;
+}
+
+.ReactModal__Content:hover {
+  opacity: 100%;
+}
+
+.ReactModal__Content h2 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-bottom: 50px;
+}
+
+.ReactModal__Content p {
+  color: rgb(75, 75, 75);
+  font-family: "Lucida Sans", Verdana, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Add these styles to your CSS */
+.btn {
+  background-color: #4988d1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #4e73a3;
+}
